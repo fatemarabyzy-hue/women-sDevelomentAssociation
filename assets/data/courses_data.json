@@ -1,0 +1,39 @@
+
+[
+  {
+    "id": 1,
+    "title": "دورة الخياطة والتفصيل",
+    "description": "تعلم أصول الخياطة والتفصيل لأحسن الأثواب",
+    "imageUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400",
+    "duration": "12 ساعة",
+    "dateRange": "17 يونيو - 8 يوليو",
+    "instructor": "أ. سارة أحمد",
+    "category": "الحرف المتاحة",
+    "isActive": true,
+    "isFavorite": false
+  },
+  {
+    "id": 2,
+    "title": "دورة تطوير الذات",
+    "description": "اكتشفي طاقتك الكاملة وطوري نفسك",
+    "imageUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400",
+    "duration": "8 ساعات",
+    "dateRange": "12 يونيو - 2 يوليو",
+    "instructor": "أ. نورة محمد",
+    "category": "التنمية البشرية",
+    "isActive": true,
+    "isFavorite": false
+  },
+  {
+    "id": 3,
+    "title": "دورة الطهي الصحي",
+    "description": "إعداد وجبات صحية ومتوازنة لعائلتك",
+    "imageUrl": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
+    "duration": "10 ساعات",
+    "dateRange": "20 يونيو - 10 يوليو",
+    "instructor": "أ. فاطمة علي",
+    "category": "الطهي",
+    "isActive": true,
+    "isFavorite": false
+  }
+]
