@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../constant.dart';
+import 'admin_dashboard.dart';
 
 class AdminLoginDialog extends StatefulWidget {
   const AdminLoginDialog({super.key});
@@ -113,10 +114,10 @@ class _AdminLoginDialogState extends State<AdminLoginDialog> {
                         if (_formKey.currentState!.validate()) {
                           if (_passwordController.text == 'admin123') {
                             Navigator.pop(context);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('تم تسجيل الدخول!'),
-                                backgroundColor: AppColors.primaryGreen,
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const AdminDashboard()
                               ),
                             );
                           } else {
