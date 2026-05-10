@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import '../database/database_helper.dart';
 import '../models/course.dart';
 import '../constant.dart';
 
 class CourseDetailScreen extends StatefulWidget {
   final Course course;
+  final VoidCallback? onFavoriteChanged;
 
   const CourseDetailScreen({
     super.key,
     required this.course,
+    this.onFavoriteChanged,
   });
 
   @override
@@ -16,7 +19,37 @@ class CourseDetailScreen extends StatefulWidget {
 
 class _CourseDetailScreenState extends State<CourseDetailScreen> {
   bool _isJoined = false;
-  bool _isFavorite = false;
+  late bool _isFavorite;
+
+  @override
+  void initState() {
+    super.initState();
+    _isFavorite = widget.course.isFavorite;
+  }
+
+  Future<void> _toggleFavorite() async {
+    setState(() {
+      _isFavorite = !_isFavorite;
+    });
+
+    await DatabaseHelper.instance.toggleFavorite(
+      widget.course.id!,
+      _isFavorite,
+    );
+
+    if (widget.onFavoriteChanged != null) {
+      widget.onFavoriteChanged!();
+    }
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          _isFavorite ? 'تمت الإضافة للمفضلة ❤️' : 'تمت الإزالة من المفضلة',
+        ),
+        backgroundColor: AppColors.primaryGreen,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +64,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
               _isFavorite ? Icons.favorite : Icons.favorite_border,
               color: _isFavorite ? Colors.red : Colors.white,
             ),
-            onPressed: () {
-              setState(() {
-                _isFavorite = !_isFavorite;
-              });
-            },
+            onPressed: _toggleFavorite,
           ),
         ],
       ),
@@ -130,6 +159,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                     textAlign: TextAlign.right,
                   ),
 
+
                   const SizedBox(height: 30),
 
                   SizedBox(
@@ -168,11 +198,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
       ),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            _isFavorite = !_isFavorite;
-          });
-        },
+        onPressed: _toggleFavorite,
         backgroundColor: _isFavorite ? Colors.red : AppColors.primaryGreen,
         child: Icon(
           _isFavorite ? Icons.favorite : Icons.favorite_border,
@@ -248,4 +274,6 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
         ],
       ),
     );
-  }}
+  }
+}
+
